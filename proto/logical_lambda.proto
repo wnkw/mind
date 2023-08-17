@@ -1,0 +1,35 @@
+syntax = "proto3";
+
+package universal;
+
+message LogicalLambda {
+    LogicalOp op = 1;
+    LogicalUnit unit = 2;
+    repeated LogicalLambda lambda = 3;
+}
+
+message LogicalUnit {
+    LogicalOp op = 1;
+    LogicalField field = 2;
+    message Value {
+        enum Type {
+            INT = 0;
+            STR = 1;
+        }
+        Type type = 1;
+        repeated uint64 u64_val = 2;
+        repeated string str_val = 3;
+        repeated string name = 4;
+    }
+    Value value = 3;
+}
+
+enum LogicalOp {
+    AND = 0;
+    OR = 1;
+    NOT = 2;
+}
+
+enum LogicalField {
+    UNKNOWN = 0;
+}
